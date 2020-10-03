@@ -27,3 +27,14 @@ sudo docker login -u="user" -p="token" containers.intersystems.com
 sudo docker pull containers.intersystems.com/intersystems/webgateway:2020.2.0.211.0
 ```
 
+Set IRIS password
+Create a file called `.env` in the repository root directory, like: 
+```
+ISC_PASSWORD=somepassword
+```
+
+Build & run
+```
+docker-compose build
+docker-compose up -d
+```
