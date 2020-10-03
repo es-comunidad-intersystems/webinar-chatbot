@@ -12,6 +12,7 @@ Install Docker
 ```
 sudo apt update
 sudo apt install docker.io
+sudo apt install docker-compose
 ```
 
 Clone repo

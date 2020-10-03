@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.0'
 services:
 
   webgateway:
@@ -12,7 +12,6 @@ services:
     - ./webgateway/CSP.ini:/opt/webgateway/bin/CSP.ini
 
   iris:
-    init: true
     container_name: iris
     build:
       context: iris
