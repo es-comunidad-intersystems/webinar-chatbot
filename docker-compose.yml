@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+
+  webgateway:
+    build:
+      context: webgateway
+    container_name: webgateway
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./webgateway/CSP.ini:/opt/webgateway/bin/CSP.ini
+
+  iris:
+    init: true
+    container_name: iris
+    build:
+      context: iris
+      args:
+        IRIS_PASSWORD: "${IRIS_PASSWORD}"
+    ports:
+      - 52773:52773
+      - 51773:51773 
