@@ -8,8 +8,8 @@ RUN ln -s ../sites-available/default-ssl.conf default-ssl.conf
 
 # ssl certificate
 WORKDIR /etc/ssl
-#COPY ssl-cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
-#COPY ssl-cert.key /etc/ssl/private/ssl-cert-snakeoil.key
+COPY ssl-cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
+COPY ssl-cert.key /etc/ssl/private/ssl-cert-snakeoil.key
 
 # apache: CSP module config
 COPY CSP.conf /etc/apache2/mods-available/CSP.conf
