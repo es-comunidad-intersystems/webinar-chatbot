@@ -2,3 +2,5 @@
 iris.key
 .env
 IAM/**
+*.pem
+*.key
