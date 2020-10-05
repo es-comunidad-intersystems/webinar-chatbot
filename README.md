@@ -8,9 +8,9 @@
 * Identity & API access: Allow full access to Cloud APIs
 * Firewall: HTTP, HTTPS
 * Register External IP
-* Google Domains: register external IP
+* Google Domains + Google Cloud DNS
 
-http://irischatbot.voidpointer.dev/csp/sys/UtilHome.csp
+https://irischatbot.voidpointer.dev/csp/sys/UtilHome.csp
 http://104.198.164.179/csp/sys/UtilHome.csp
 
 ### Install Docker
@@ -41,7 +41,7 @@ Run certbot in standalone mode (temporary http server is run)
 sudo certbot certonly --standalone --preferred-challenges http -d irischatbot.voidpointer.dev
 ```
 
-Copy certificate files into webgateway context:
+Copy certificate files into webgateway context (required for building):
 ```
 sudo cp /etc/letsencrypt/live/irischatbot.voidpointer.dev/fullchain.pem webgateway/ssl-cert.pem
 sudo cp /etc/letsencrypt/live/irischatbot.voidpointer.dev/privkey.pem webgateway/ssl-cert.key
