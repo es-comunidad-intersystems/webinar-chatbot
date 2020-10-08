@@ -66,3 +66,40 @@ docker-compose build
 docker-compose up -d
 ```
 
+
+# IRIS
+
+REST API created using ^%REST (it is already built in the image):
+```
+CHATBOT>do ^%REST
+
+REST Command Line Interface (CLI) helps you CREATE or DELETE a REST application.
+Enter an application name or (L)ist all REST applications (L): L
+
+Applications        Web Applications
+------------        ----------------
+
+Enter an application name or (L)ist all REST applications (L): Chatbot.API.DialogFlow
+REST application not found: Chatbot.API.DialogFlow
+Do you want to create a new REST application? Y or N (Y): Y
+
+File path or absolute URL of a swagger document.
+If no document specified, then create an empty application.
+OpenAPI 2.0 swagger: /shared/chatbot-dialogflow-api.json 
+
+OpenAPI 2.0 swagger document: /shared/chatbot-dialogflow-api.json
+Confirm operation, Y or N (Y): Y
+
+-----Creating REST application: Chatbot.API.DialogFlow-----
+CREATE Chatbot.API.DialogFlow.spec
+GENERATE Chatbot.API.DialogFlow.disp
+CREATE Chatbot.API.DialogFlow.impl
+REST application successfully created.
+
+Create a web application for the REST application? Y or N (Y): Y
+Specify a web application name beginning with a single '/'. Default is /csp/Chatbot/API/DialogFlow
+Web application name: /chatbot/dialogflow
+
+-----Deploying REST application: Chatbot.API.DialogFlow-----
+Application Chatbot.API.DialogFlow deployed to /chatbot/dialogflow
+```

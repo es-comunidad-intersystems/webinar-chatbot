@@ -4,3 +4,4 @@ iris.key
 IAM/**
 *.pem
 *.key
+settings.json

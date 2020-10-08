@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Receive a requests from Dialogflow in the form of the response to a user query matched by intents with webhook enabled",
+    "version": "1.0.0",
+    "title": "Fullfillment for Dialog Flow (WebHook)"
+  },
+  "host": "irischatbot.voidpointer.dev",
+  "basePath": "/chatbot/dialogflow",
+  "tags": [
+    {
+      "name": "webhook",
+      "description": "Receive requests from Dialog Flow"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/webhook": {
+      "post": {
+        "tags": [
+          "webhook"
+        ],
+        "summary": "Process a WebHookRequest from Dialog Flow",
+        "description": "",
+        "operationId": "processWebHook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "WebHookRequest",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "example": {
+                "responseId": "response-id",
+                "session": "projects/project-id/agent/sessions/session-id",
+                "queryResult": {
+                  "queryText": "End-user expression",
+                  "parameters": {
+                    "param-name": "param-value"
+                  },
+                  "allRequiredParamsPresent": true,
+                  "fulfillmentText": "Response configured for matched intent",
+                  "fulfillmentMessages": [
+                    {
+                      "text": {
+                        "text": [
+                          "Response configured for matched intent"
+                        ]
+                      }
+                    }
+                  ],
+                  "outputContexts": [
+                    {
+                      "name": "projects/project-id/agent/sessions/session-id/contexts/context-name",
+                      "lifespanCount": 5,
+                      "parameters": {
+                        "param-name": "param-value"
+                      }
+                    }
+                  ],
+                  "intent": {
+                    "name": "projects/project-id/agent/intents/intent-id",
+                    "displayName": "matched-intent-name"
+                  },
+                  "intentDetectionConfidence": 1,
+                  "diagnosticInfo": {},
+                  "languageCode": "en"
+                },
+                "originalDetectIntentRequest": {}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "example": {
+                "fulfillmentMessages": [
+                  {
+                    "text": {
+                      "text": [
+                        "Text response from webhook"
+                      ]
+                    }
+                  }
+                ],
+                "outputContexts": [
+                  {
+                    "name": "projects/project-id/agent/sessions/session-id/contexts/context-name",
+                    "lifespanCount": 5,
+                    "parameters": {
+                      "param-name": "param-value"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
