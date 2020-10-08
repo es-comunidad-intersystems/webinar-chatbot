@@ -17,6 +17,7 @@ ClassMethod processWebHook(body As %DynamicObject) As %DynamicObject
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
 
+    set ^zlog($i(^zlog))=body.%ToJSON()
     quit { "msg": "well done" }
 }
 
