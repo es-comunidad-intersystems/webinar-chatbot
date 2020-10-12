@@ -13,6 +13,11 @@ XData ProductionDefinition
     <Setting Target="Host" Name="%remoteClassname">com.intersystems.google.OAuth2Operation</Setting>
     <Setting Target="Host" Name="%remoteSettings">CredentialsFile=/credentials/google-credentials.json</Setting>
   </Item>
+  <Item Name="DialogFlow DetectIntent" Category="" ClassName="Chatbot.BO.DialogFlowDetectIntent" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Adapter" Name="HTTPServer">dialogflow.googleapis.com</Setting>
+    <Setting Target="Adapter" Name="SSLConfig">SSL</Setting>
+    <Setting Target="Adapter" Name="URL">/v2</Setting>
+  </Item>
 </Production>
 }
 

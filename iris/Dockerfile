@@ -13,6 +13,7 @@ RUN chown -R 51773:52773 /opt/chatbot
 # copy iris source code
 WORKDIR /tmp
 COPY --chown=51773:52773 src src
+COPY --chown=51773:52773 install install
 
 # set iris password
 RUN echo ${IRIS_PASSWORD} > /tmp/password.txt && /usr/irissys/dev/Container/changePassword.sh /tmp/password.txt

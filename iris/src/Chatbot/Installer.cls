@@ -24,6 +24,13 @@ XData Install [ XMLNamespace = INSTALLER ]
         <Import File="${SourcePath}" Recurse="1" Flags="cuk" />
         <Production Name="Chatbot.Production" AutoStart="1"/>
     </Namespace>
+
+    <Namespace Name="%SYS" Create="no">
+        <!-- import SSL config (for https) -->
+        <Invoke Class="Security.SSLConfigs" Method="Import" CheckStatus="true">
+            <Arg Value="/tmp/install/config-ssl.xml"/>
+        </Invoke>
+    </Namespace>
 </Manifest>
 }
 
