@@ -1,7 +1,16 @@
+# os files
 .DS_Store
+
+# keys, certificates & credentials
 iris.key
 .env
-IAM/**
 *.pem
 *.key
+google-credentials.json
+
+# vscode settings
 settings.json
+
+# output java maven files (except generated jar)
+java/target/*
+!java/target/iris-google-oauth-pex-0.1-jar-with-dependencies.jar

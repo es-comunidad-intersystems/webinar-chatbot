@@ -22,3 +22,14 @@ services:
       - 51773:51773
     volumes:
       - ./shared:/shared
+
+  # java gateway
+  jgw:
+    image: intersystemscommunity/jgw:latest
+    container_name: jgw
+    restart: always
+    ports: 
+      - 55555:55555
+    volumes:
+      - ./java/target/iris-google-oauth-pex-0.1-jar-with-dependencies.jar:/jgw/iris-google-oauth-pex-0.1-jar-with-dependencies.jar
+      - ./google-credentials.json:/credentials/google-credentials.json
