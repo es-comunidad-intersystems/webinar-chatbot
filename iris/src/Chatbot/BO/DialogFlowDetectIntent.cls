@@ -34,7 +34,7 @@ Method detectIntent(pRequest As Chatbot.Msg.DetectIntentReq, Output pResponse As
         // handle response
         if $isobject(httpRsp) {
             set formatter = ##class(%JSON.Formatter).%New()
-            do formatter.FormatToStream(httpRsp.Data.Read(), .formatted)
+            do formatter.FormatToStream(httpRsp.Data, .formatted)
             set pResponse.raw = formatted
 
             // instantiate response in json dynamic object & grab some properties
