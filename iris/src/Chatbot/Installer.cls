@@ -22,6 +22,7 @@ XData Install [ XMLNamespace = INSTALLER ]
             <Database Name="${Namespace}-APP" Dir="${CodeDBPath}" Create="yes" MountRequired="true" Resource="%DB_DEFAULT" PublicPermissions="RW" MountAtStartup="true"/> 
         </Configuration>
         <Import File="${SourcePath}" Recurse="1" Flags="cuk" />
+        <Import File="${SourcePath}/Chatbot/API/DialogFlow/impl.cls" Flags="cuk" />
         <Production Name="Chatbot.Production" AutoStart="1"/>
     </Namespace>
 
