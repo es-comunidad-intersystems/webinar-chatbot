@@ -26,6 +26,12 @@ XData ProductionDefinition
   </Item>
   <Item Name="Chatbot.API.Telegram.impl" Category="" ClassName="Chatbot.API.Telegram.impl" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="Telegram SendMessage" Category="" ClassName="Chatbot.BO.TelegramSendMessage" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Adapter" Name="HTTPPort">443</Setting>
+    <Setting Target="Adapter" Name="HTTPServer">api.telegram.org</Setting>
+    <Setting Target="Adapter" Name="SSLConfig">SSL</Setting>
+    <Setting Target="Host" Name="TelegramCredentials">TelegramBot</Setting>
+  </Item>
 </Production>
 }
 
