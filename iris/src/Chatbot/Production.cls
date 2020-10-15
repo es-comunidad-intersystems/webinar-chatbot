@@ -24,6 +24,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="Chatbot.API.DialogFlow.impl" Category="" ClassName="Chatbot.API.DialogFlow.impl" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="Chatbot.API.Telegram.impl" Category="" ClassName="Chatbot.API.Telegram.impl" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 

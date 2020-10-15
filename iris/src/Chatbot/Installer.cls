@@ -9,8 +9,6 @@ Parameter DataDBPath = "/opt/chatbot/db/DATA";
 
 Parameter CodeDBPath = "/opt/chatbot/db/CODE";
 
-Parameter WebApp = "/chatbot/dialogflow";
-
 XData Install [ XMLNamespace = INSTALLER ]
 {
 <Manifest>
@@ -23,6 +21,7 @@ XData Install [ XMLNamespace = INSTALLER ]
         </Configuration>
         <Import File="${SourcePath}" Recurse="1" Flags="cuk" />
         <Import File="${SourcePath}/Chatbot/API/DialogFlow/impl.cls" Flags="cuk" />
+        <Import File="${SourcePath}/Chatbot/API/Telegram/impl.cls" Flags="cuk" />
         <Production Name="Chatbot.Production" AutoStart="1"/>
     </Namespace>
 
@@ -30,6 +29,13 @@ XData Install [ XMLNamespace = INSTALLER ]
         <!-- import SSL config (for https) -->
         <Invoke Class="Security.SSLConfigs" Method="Import" CheckStatus="true">
             <Arg Value="/tmp/install/config-ssl.xml"/>
+        </Invoke>
+        <!-- api endpoints -->
+        <Invoke Class="Security.Applications" Method="Import" CheckStatus="true">
+            <Arg Value="/tmp/install/dialogflow-webapp.xml"/>
+        </Invoke>
+        <Invoke Class="Security.Applications" Method="Import" CheckStatus="true">
+            <Arg Value="/tmp/install/telegram-webapp.xml"/>
         </Invoke>
     </Namespace>
 </Manifest>
@@ -49,7 +55,7 @@ ClassMethod Run(ByRef vars) As %Status
         write "START INSTALLER",! 
         
         // set default values for installer variables
-        for ivar="SourcePath","Namespace","DataDBPath","CodeDBPath","WebApp" {
+        for ivar="SourcePath","Namespace","DataDBPath","CodeDBPath" {
             if '$data(vars(ivar)) set vars(ivar)=$parameter($classname(), ivar)
         } 
         
@@ -60,34 +66,12 @@ ClassMethod Run(ByRef vars) As %Status
             do $SYSTEM.Process.Terminate($JOB,1)
         }
 
-        // endpoint for REST apis
-        $$$ThrowOnError(..CreateWebApp(vars("Namespace"), vars("WebApp"), "Chatbot.API.DialogFlow.disp"))
-
     } catch ex { 
         set sc = ex.AsStatus() 
         write $System.Status.GetErrorText(sc),! 
         do $SYSTEM.Process.Terminate($JOB,1) 
     } 
     quit sc
-}
-
-/// Create web application
-ClassMethod CreateWebApp(pNamespace As %String, pWebApp As %String, pDispatch As %String) As %Status
-{
-  set ret = $$$OK
-  try {
-    zn "%SYS" 
-    set webName = pWebApp 
-    set webProperties("DispatchClass") = pDispatch 
-    set webProperties("NameSpace") = pNamespace 
-    set webProperties("Enabled") = 1 
-    set webProperties("AutheEnabled") = 32 
-    $$$ThrowOnError(##class(Security.Applications).Create(webName, .webProperties))
-
-  } catch ex {
-    set ret = ex.AsStatus()
-  } 
-  quit ret
 }
 
 }

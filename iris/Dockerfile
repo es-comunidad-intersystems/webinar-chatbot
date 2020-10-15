@@ -27,7 +27,6 @@ RUN \
   set vars("SourcePath")="/tmp/src" \
   set vars("DataDBPath")="/opt/chatbot/db/DATA" \
   set vars("CodeDBPath")="/opt/chatbot/db/CODE" \
-  set vars("WebApp")="/chatbot/dialogflow" \
   set sc = ##class(Chatbot.Installer).Run(.vars)
 
 # bringing the standard shell back
