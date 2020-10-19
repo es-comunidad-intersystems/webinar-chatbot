@@ -12,8 +12,13 @@ Method detectIntent(pRequest As Chatbot.Msg.DetectIntentReq, Output pResponse As
         // request URL
         set url = ..Adapter.URL_"/"_pRequest.session_"?access_token="_pRequest.tokenValue
 
+        set payload = {}.%FromJSON(pRequest.payload)
+
         // request body
-        set body = { 
+        set body = {
+            "queryParams": {
+                "payload": (payload)
+            },
             "queryInput": {
                 "text": {
                     "text": (pRequest.text),

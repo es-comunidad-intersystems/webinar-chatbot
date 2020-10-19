@@ -50,6 +50,22 @@ Method isUserRegistered(pRequest As Chatbot.Msg.IsUserRegisteredReq, pResponse A
   quit ret
 }
 
+Method getUserInfo(pRequest As Chatbot.Msg.GetUserInfoReq, pResponse As Chatbot.Msg.GetUserInfoRsp) As %Status
+{
+  set ret = $$$OK
+  try {
+      
+      set pResponse = ##class(Chatbot.Msg.GetUserInfoRsp).%New()
+    
+      set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
+      set pResponse.user = userObj
+
+  } catch ex {
+    set ret = ex.AsStatus()
+  }
+  quit ret
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -58,6 +74,9 @@ XData MessageMap
   </MapItem>
   <MapItem MessageType="Chatbot.Msg.IsUserRegisteredReq">
     <Method>isUserRegistered</Method>
+  </MapItem>
+  <MapItem MessageType="Chatbot.Msg.GetUserInfoReq">
+    <Method>getUserInfo</Method>
   </MapItem>
 </MapItems>
 }

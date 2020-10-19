@@ -25,14 +25,25 @@ ClassMethod processWebHook(body As %DynamicObject) As %DynamicObject
     set formatter = ##class(%JSON.Formatter).%New()
     do formatter.FormatToStream(body, .formatted)
     
-    set req = ##class(Ens.StreamContainer).%New()
-    set req.Stream = formatted
+    set req = ##class(Chatbot.Msg.DetectIntentWebHookReq).%New()
+    set req.raw = formatted
     
-    // send message to Business Operation
-    set sc = service.SendRequestAsync("Dummy", req, .rsp)
+    // extract fields
+    set jsonObj = {}.%FromJSON(req.raw)
+    set req.intent = jsonObj.queryResult.intent.displayName
+    set req.allRequiredParamsPresent = jsonObj.queryResult.allRequiredParamsPresent
+    set req.userId = jsonObj.originalDetectIntentRequest.payload.userId
+
+    // send message
+    set sc = service.SendRequestSync("DetectIntent WebHook Process", req, .rsp)
     $$$ThrowOnError(sc)
 
-    quit { "status": "OK" }
+    // return processed response
+    quit {
+        "fulfillmentMessages": [{
+            "text": {"text": [(rsp.text)]}
+        }]
+    }
 }
 
 }

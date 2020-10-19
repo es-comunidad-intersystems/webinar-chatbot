@@ -5,6 +5,8 @@ Property userId As %String;
 
 Property registered As %Boolean;
 
+Property patientNo As %String;
+
 Index UserIdKey On userId [ IdKey, Unique ];
 
 Storage Default
@@ -15,6 +17,9 @@ Storage Default
 </Value>
 <Value name="2">
 <Value>registered</Value>
+</Value>
+<Value name="3">
+<Value>patientNo</Value>
 </Value>
 </Data>
 <DataLocation>^Chatbot.Data.UserD</DataLocation>

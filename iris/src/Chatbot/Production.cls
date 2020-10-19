@@ -20,8 +20,6 @@ XData ProductionDefinition
   </Item>
   <Item Name="DetectIntent Process" Category="" ClassName="Chatbot.BP.DetectIntentProcess" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
-  <Item Name="Dummy" Category="" ClassName="EnsLib.File.PassthroughOperation" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
-  </Item>
   <Item Name="Chatbot.API.DialogFlow.impl" Category="" ClassName="Chatbot.API.DialogFlow.impl" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="Chatbot.API.Telegram.impl" Category="" ClassName="Chatbot.API.Telegram.impl" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
@@ -35,6 +33,8 @@ XData ProductionDefinition
   <Item Name="Data Operations" Category="" ClassName="Chatbot.BO.DataOperations" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="Telegram WebHook Process" Category="" ClassName="Chatbot.BP.TelegramWebHookProcess" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="DetectIntent WebHook Process" Category="" ClassName="Chatbot.BP.DetectIntentWebHookProcess" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
 </Production>
 }
