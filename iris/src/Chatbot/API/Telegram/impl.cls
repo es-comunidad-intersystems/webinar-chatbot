@@ -42,7 +42,7 @@ ClassMethod processUpdate(body As %DynamicObject) As %DynamicObject
     }
     
     // send message
-    set sc = service.SendRequestAsync("Dummy", req, .rsp)
+    set sc = service.SendRequestAsync("Telegram WebHook Process", req, .rsp)
     $$$ThrowOnError(sc)
 
     quit { "status": "OK" }

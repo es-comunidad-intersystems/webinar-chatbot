@@ -34,6 +34,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="Data Operations" Category="" ClassName="Chatbot.BO.DataOperations" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="Telegram WebHook Process" Category="" ClassName="Chatbot.BP.TelegramWebHookProcess" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 
