@@ -32,6 +32,8 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="SSLConfig">SSL</Setting>
     <Setting Target="Host" Name="TelegramCredentials">TelegramBot</Setting>
   </Item>
+  <Item Name="Data Operations" Category="" ClassName="Chatbot.BO.DataOperations" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 

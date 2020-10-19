@@ -25,10 +25,23 @@ ClassMethod processUpdate(body As %DynamicObject) As %DynamicObject
     set formatter = ##class(%JSON.Formatter).%New()
     do formatter.FormatToStream(body, .formatted)
     
-    set req = ##class(Ens.StreamContainer).%New()
-    set req.Stream = formatted
+    // raw incoming body
+    set req = ##class(Chatbot.Msg.TelegramWebHookReq).%New()
+    set req.raw = formatted
     
-    // send message to Business Operation
+    // extract fields
+    set jsonObj = {}.%FromJSON(req.raw)
+    set req.userId = jsonObj.message.from.id
+    set req.chatId = jsonObj.message.chat.id
+    set req.text = jsonObj.message.text
+
+    // parse commands
+    if $extract(req.text,1,1)="/" {
+        set req.command = $piece(req.text, " ", 1)
+        set req.params = $piece(req.text, " ", 2, *)
+    }
+    
+    // send message
     set sc = service.SendRequestAsync("Dummy", req, .rsp)
     $$$ThrowOnError(sc)
 
