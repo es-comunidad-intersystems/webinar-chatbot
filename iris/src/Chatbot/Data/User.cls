@@ -1,11 +1,9 @@
-Class Chatbot.Data.User Extends (%Persistent, %JSON.Adaptor)
+Class Chatbot.Data.User Extends (%Persistent, %JSON.Adaptor, %XML.Adaptor)
 {
 
 Property userId As %String;
 
 Property registered As %Boolean;
-
-Property patientNo As %String;
 
 Index UserIdKey On userId [ IdKey, Unique ];
 
