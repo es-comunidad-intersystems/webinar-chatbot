@@ -33,17 +33,26 @@ ClassMethod processWebHook(body As %DynamicObject) As %DynamicObject
     set req.intent = jsonObj.queryResult.intent.displayName
     set req.allRequiredParamsPresent = jsonObj.queryResult.allRequiredParamsPresent
     set req.userId = jsonObj.originalDetectIntentRequest.payload.userId
+    set req.fulfillmentText = jsonObj.queryResult.fulfillmentText
+    set req.session = jsonObj.session
 
     // send message
     set sc = service.SendRequestSync("DetectIntent WebHook Process", req, .rsp)
     $$$ThrowOnError(sc)
 
     // return processed response
-    quit {
+    set rsp = {
         "fulfillmentMessages": [{
             "text": {"text": [(rsp.text)]}
-        }]
+        }],
+        "outputContexts": ({}.%FromJSON(rsp.outputContexts))
     }
+
+    // display response in event log
+    do formatter.FormatToStream(rsp, .formattedRsp)
+    $$$LOGINFO(formattedRsp.Read())
+
+    quit rsp
 }
 
 }

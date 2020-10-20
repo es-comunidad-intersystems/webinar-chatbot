@@ -91,6 +91,28 @@ Method getNextAppointments(pRequest As Chatbot.Msg.GetNextApptReq, pResponse As 
   quit ret
 }
 
+/// Finds an appointment slot for some given conditions
+Method findAppointmentSlot(pRequest As Chatbot.Msg.FindApptSlotReq, pResponse As Chatbot.Msg.FindApptSlotRsp) As %Status
+{
+  set ret = $$$OK
+  try {
+      set pResponse = ##class(Chatbot.Msg.FindApptSlotRsp).%New()
+      set statement = ##class(%SQL.Statement).%New()
+      $$$ThrowOnError(statement.%Prepare("select top 1 %id from chatbot_data.appointment where apptdate = ? and schedule = ? and patientno is null order by id"))
+      set result = statement.%Execute(pRequest.apptDate, pRequest.schedule)
+      
+      while result.%Next() {
+        set apptId = result.%GetData(1)
+        set pResponse.appt = ##class(Chatbot.Data.Appointment).%OpenId(apptId) 
+      }
+    
+  } catch ex {
+    set ret = ex.AsStatus()
+  }
+
+  quit ret
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -102,6 +124,9 @@ XData MessageMap
   </MapItem>
   <MapItem MessageType="Chatbot.Msg.GetNextApptReq">
     <Method>getNextAppointments</Method>
+  </MapItem>
+  <MapItem MessageType="Chatbot.Msg.FindApptSlotReq">
+    <Method>findAppointmentSlot</Method>
   </MapItem>
 </MapItems>
 }

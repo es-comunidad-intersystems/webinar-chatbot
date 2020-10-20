@@ -38,13 +38,18 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <sync name='Wait for response' calls='Register User' type='all' xpos='200' ypos='350' />
 </sequence>
 </case>
+<case condition='request.command="/ayuda"' name='/ayuda' >
+<sequence name='/ayuda' xpos='470' ypos='550' xend='200' yend='350' >
+<assign name="Set command response" property="context.telegramMsg.text" value="&quot;Hola! Soy un bot. Puedes utilizar los comandos o escribir frases como:&quot;_$c(10)_&quot;- hola amigo!&quot;_$c(10)_&quot;- qué citas tengo?&quot;" action="set" xpos='200' ypos='250' />
+</sequence>
+</case>
 <default>
-<assign name="Default Telegram Response" property="context.telegramMsg.text" value="&quot;Comando no reconocido&quot;" action="set" xpos='470' ypos='550' />
+<assign name="Default Telegram Response" property="context.telegramMsg.text" value="&quot;Comando no reconocido&quot;" action="set" xpos='740' ypos='550' />
 </default>
 </switch>
 </true>
 <false>
-<call name='IsUserRegistered' target='Data Operations' async='1' xpos='740' ypos='400' >
+<call name='IsUserRegistered' target='Data Operations' async='1' xpos='1010' ypos='400' >
 <annotation><![CDATA[Data Operations]]></annotation>
 <request type='Chatbot.Msg.IsUserRegisteredReq' >
 <assign property="callrequest.userId" value="request.userId" action="set" />
@@ -53,10 +58,10 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="context.userRegistered" value="callresponse.registered" action="set" />
 </response>
 </call>
-<sync name='Wait for rsp' calls='IsUserRegistered' timeout='10' type='all' xpos='740' ypos='500' />
-<if name='User Registered?' condition='context.userRegistered=1' xpos='740' ypos='600' xend='740' yend='850' >
+<sync name='Wait for rsp' calls='IsUserRegistered' timeout='10' type='all' xpos='1010' ypos='500' />
+<if name='User Registered?' condition='context.userRegistered=1' xpos='1010' ypos='600' xend='1010' yend='850' >
 <true>
-<sequence name='detectIntent' xpos='1010' ypos='750' xend='200' yend='550' >
+<sequence name='detectIntent' xpos='1280' ypos='750' xend='200' yend='550' >
 <annotation><![CDATA[Dialog Flow]]></annotation>
 <assign name="Set default response" property="context.telegramMsg.text" value="&quot;Default empty response&quot;" action="set" xpos='200' ypos='250' />
 <call name='Detect Intent Process' target='DetectIntent Process' async='1' xpos='200' ypos='350' >
@@ -74,7 +79,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </sequence>
 </true>
 <false>
-<assign name="Not Registered Response" property="context.telegramMsg.text" value="&quot;No estás registrado. Debes registrarte primero.&quot;" action="set" xpos='740' ypos='750' />
+<assign name="Not Registered Response" property="context.telegramMsg.text" value="&quot;No estás registrado. Debes registrarte primero.&quot;" action="set" xpos='1010' ypos='750' />
 </false>
 </if>
 </false>

@@ -7,6 +7,10 @@ Property allRequiredParamsPresent As %Boolean;
 
 Property userId As %String(MAXLEN = "");
 
+Property fulfillmentText As %String(MAXLEN = "");
+
+Property session As %String(MAXLEN = "");
+
 Property raw As %Stream.GlobalCharacter;
 
 Storage Default
@@ -23,6 +27,12 @@ Storage Default
 <Value>userId</Value>
 </Value>
 <Value name="4">
+<Value>fulfillmentText</Value>
+</Value>
+<Value name="5">
+<Value>session</Value>
+</Value>
+<Value name="6">
 <Value>raw</Value>
 </Value>
 </Data>

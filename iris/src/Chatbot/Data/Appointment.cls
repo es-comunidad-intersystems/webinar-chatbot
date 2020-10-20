@@ -1,4 +1,4 @@
-Class Chatbot.Data.Appointment Extends (%Persistent, %JSON.Adaptor)
+Class Chatbot.Data.Appointment Extends (%Persistent, %JSON.Adaptor, %XML.Adaptor)
 {
 
 Property Schedule As %String;
@@ -26,7 +26,7 @@ ClassMethod CreateSlots(pStartDate As %Date = {+$h}, pEndDate As %Date = {+$h+5}
 		$$$ThrowOnError(..%DeleteExtent())
 		
 		set scheduleList = $lb("Psicología","Dermatología","Cardiología")
-		set drList = $lb("Campos,Dr.","González,Dr.","Sagé i Pau,Dr.","Toro,Dra.","Zamora,Dr.")
+		set drList = $lb("Dr. Campos","Dr. González","Dr. Sagé i Pau","Dra. Toro","Dr. Zamora")
 		set serviceList = $lb("Primera Visita","Revisión")
 		
 		set startTime=$ztimeh("08:00",2)
