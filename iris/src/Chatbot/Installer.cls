@@ -22,6 +22,8 @@ XData Install [ XMLNamespace = INSTALLER ]
         <Import File="${SourcePath}" Recurse="1" Flags="cuk" />
         <Import File="${SourcePath}/Chatbot/API/DialogFlow/impl.cls" Flags="cuk" />
         <Import File="${SourcePath}/Chatbot/API/Telegram/impl.cls" Flags="cuk" />
+        <Invoke Class="Chatbot.Data.Appointment" Method="CreateSlots" CheckStatus="true">
+        </Invoke>
         <Production Name="Chatbot.Production" AutoStart="1"/>
     </Namespace>
 
