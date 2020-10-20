@@ -2,6 +2,11 @@
 Class Chatbot.BP.DetectIntentProcess Extends Ens.BusinessProcessBPL
 {
 
+Storage Default
+{
+<Type>%Storage.Persistent</Type>
+}
+
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
@@ -9,7 +14,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <context>
 <property name='pexTokenRsp' type='EnsLib.PEX.Message' instantiate='0' />
 </context>
-<sequence xend='200' yend='750' >
+<sequence xend='200' yend='850' >
 <call name='Google Auth Token' target='Google Auth Token Oper' async='1' xpos='200' ypos='250' >
 <annotation><![CDATA[Get Token]]></annotation>
 <request type='Chatbot.Msg.DetectIntentReq' >
@@ -34,13 +39,12 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </response>
 </call>
 <sync name='Wait for DetectIntent' calls='DetectIntent' timeout='10' type='all' xpos='200' ypos='650' />
+<code name='Parse response text' xpos='200' ypos='750' >
+<![CDATA[ set jsonObj = {}.%FromJSON(response.raw)
+ set response.text = jsonObj.queryResult.fulfillmentMessages."0".text.text."0"]]>
+</code>
 </sequence>
 </process>
-}
-
-Storage Default
-{
-<Type>%Storage.Persistent</Type>
 }
 
 }

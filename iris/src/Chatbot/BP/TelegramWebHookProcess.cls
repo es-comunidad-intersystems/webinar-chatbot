@@ -2,6 +2,11 @@
 Class Chatbot.BP.TelegramWebHookProcess Extends Ens.BusinessProcessBPL
 {
 
+Storage Default
+{
+<Type>%Storage.Persistent</Type>
+}
+
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
@@ -61,7 +66,9 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="callrequest.lang" value="&quot;es&quot;" action="set" />
 <assign property="callrequest.payload" value="{&quot;userId&quot;: (request.userId) }.%ToJSON()" action="set" />
 </request>
-<response type='Chatbot.Msg.DetectIntentRsp' />
+<response type='Chatbot.Msg.DetectIntentRsp' >
+<assign property="context.telegramMsg.text" value="callresponse.text" action="set" />
+</response>
 </call>
 <sync name='Wait detectIntent rsp' calls='Detect Intent Process' timeout='60' type='all' xpos='200' ypos='450' />
 </sequence>
@@ -82,11 +89,6 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </call>
 </sequence>
 </process>
-}
-
-Storage Default
-{
-<Type>%Storage.Persistent</Type>
 }
 
 }

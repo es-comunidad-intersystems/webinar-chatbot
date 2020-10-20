@@ -5,7 +5,7 @@ Property userId As %String;
 
 Property chatId As %String;
 
-Property text As %String;
+Property text As %String(MAXLEN = "");
 
 Property command As %String;
 

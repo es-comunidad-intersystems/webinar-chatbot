@@ -1,7 +1,7 @@
 Class Chatbot.Msg.DetectIntentRsp Extends Ens.Response
 {
 
-Property text As %String;
+Property text As %String(MAXLEN = "");
 
 Property raw As %Stream.GlobalCharacter;
 

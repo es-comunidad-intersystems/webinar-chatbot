@@ -20,8 +20,8 @@ Method sendMessage(pRequest As Chatbot.Msg.TelegramMsgReq, Output pResponse As C
         $$$ThrowOnError(sc)
 
         // request URL
-        set url = ..Adapter.URL_"/bot"_credObj.Password_"/sendMessage?chat_id="_pRequest.chatId_"&text="_pRequest.text
-
+        set url = ..Adapter.URL_"/bot"_credObj.Password_"/sendMessage?chat_id="_pRequest.chatId_"&text="_$replace(pRequest.text, $char(10), "%0A")
+        
         // send GET request
         set sc = ..Adapter.GetURL(url, .httpRsp, "", "")
         if $$$ISERR(sc),$isobject(httpRsp),$isobject(httpRsp.Data),httpRsp.Data.Size {
