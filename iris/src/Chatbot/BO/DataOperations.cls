@@ -3,22 +3,30 @@ Class Chatbot.BO.DataOperations Extends Ens.BusinessOperation
 
 Parameter INVOCATION = "Queue";
 
+/// 
+/// Registers a user. Simulates the registration process of a user and linking to a patient.
 Method registerUser(pRequest As Chatbot.Msg.RegisterUserReq, pResponse As Chatbot.Msg.RegisterUserRsp) As %Status
 {
   set ret = $$$OK
   try {
-
     set pResponse = ##class(Chatbot.Msg.RegisterUserRsp).%New()
 
     set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
+    // -- create user
     if '$isobject(userObj) {
       set userObj = ##class(Chatbot.Data.User).%New()
       set userObj.userId = pRequest.userId
+      // assign a patient number
+      set userObj.patientNo = ##class(%PopulateUtils).SSN()
+      // create some appointments
+      $$$ThrowOnError(##class(Chatbot.Data.Appointment).CreateRandomAppointments(userObj.patientNo, $random(3)))
     }
+    // -- update user
     set userObj.registered = 1
-    
     set sc = userObj.%Save()
-    set pResponse.result = sc
+   
+    // -- response
+    set pResponse.user = userObj
 
     $$$ThrowOnError(sc)
 
@@ -29,6 +37,7 @@ Method registerUser(pRequest As Chatbot.Msg.RegisterUserReq, pResponse As Chatbo
   quit ret
 }
 
+/// Checks if a user is registered
 Method isUserRegistered(pRequest As Chatbot.Msg.IsUserRegisteredReq, pResponse As Chatbot.Msg.IsUserRegisteredRsp) As %Status
 {
   set ret = $$$OK
@@ -50,6 +59,38 @@ Method isUserRegistered(pRequest As Chatbot.Msg.IsUserRegisteredReq, pResponse A
   quit ret
 }
 
+/// Returns next appointments for a given patient
+Method getNextAppointments(pRequest As Chatbot.Msg.GetNextApptReq, pResponse As Chatbot.Msg.GetNextApptRsp) As %Status
+{
+  set ret = $$$OK
+  try {
+      set pResponse = ##class(Chatbot.Msg.GetNextApptRsp).%New()
+      set pResponse.apptList = ##class(%ListOfObjects).%New()
+
+      set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
+      if $isobject(userObj) {
+        set statement = ##class(%SQL.Statement).%New()
+		    $$$ThrowOnError(statement.%Prepare("select apptdate, starttime, schedule from chatbot_data.appointment where patientno = ?"))
+		    set result = statement.%Execute(userObj.patientNo)
+        
+        while result.%Next() {
+			    set apptDate = result.%GetData(1)
+          set startTime = result.%GetData(2)
+          set schedule = result.%GetData(3)
+          
+          set apptTxt = $zdate(apptDate,4)_" "_$ztime(startTime,2)_" "_schedule
+          do pResponse.apptList.Insert(apptTxt) 
+        }
+		
+      }
+
+  } catch ex {
+    set ret = ex.AsStatus()
+  }
+
+  quit ret
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -58,6 +99,9 @@ XData MessageMap
   </MapItem>
   <MapItem MessageType="Chatbot.Msg.IsUserRegisteredReq">
     <Method>isUserRegistered</Method>
+  </MapItem>
+  <MapItem MessageType="Chatbot.Msg.GetNextApptReq">
+    <Method>getNextAppointments</Method>
   </MapItem>
 </MapItems>
 }

@@ -13,9 +13,11 @@ Property UniversalService As %String;
 
 Property Doctor As %String;
 
-Property ApptUser As User;
+Property PatientNo As %String;
 
-ClassMethod CreateSlots(pStartDate As %Date = {+$h-1}, pEndDate As %Date = {+$h+10})
+/// Create appointment slots
+/// write ##class(Chatbot.Data.Appointment).CreateSlots()
+ClassMethod CreateSlots(pStartDate As %Date = {+$h-1}, pEndDate As %Date = {+$h+3})
 {
     #define RandomItem(%list) $lg(%list, 1+$random($listlength(%list)))
 
@@ -50,6 +52,33 @@ ClassMethod CreateSlots(pStartDate As %Date = {+$h-1}, pEndDate As %Date = {+$h+
 	quit ret
 }
 
+/// Create random appointments for a given patient
+/// write ##class(Chatbot.Data.Appointment).CreateRandomAppointments(123)
+ClassMethod CreateRandomAppointments(pPatientNo As %String = "", pNumAppointments As %Integer = 1) As %Status
+{
+	set ret = $$$OK
+	try {
+		// get max row
+		set statement = ##class(%SQL.Statement).%New()
+		$$$ThrowOnError(statement.%Prepare("select max(%id) from Chatbot_Data.Appointment"))
+		set result = statement.%Execute()
+
+		if result.%Next() {
+			set maxRow = result.%GetData(1)
+			// create random appointments
+			for i=1:1:pNumAppointments {
+				set rowId = 1 + $random(maxRow)
+				set updateStatement = ##class(%SQL.Statement).%New()
+				$$$ThrowOnError(updateStatement.%Prepare("update Chatbot_Data.Appointment set patientNo=? where %id=? and patientNo is null"))
+				set updateResult = updateStatement.%Execute(pPatientNo, rowId)
+			}
+        }
+	} catch ex {
+		set ret = ex.AsStatus()
+	}
+	quit ret
+}
+
 Storage Default
 {
 <Data name="AppointmentDefaultData">
@@ -75,7 +104,7 @@ Storage Default
 <Value>Doctor</Value>
 </Value>
 <Value name="8">
-<Value>ApptUser</Value>
+<Value>PatientNo</Value>
 </Value>
 </Data>
 <DataLocation>^Chatbot.Data.AppointmentD</DataLocation>

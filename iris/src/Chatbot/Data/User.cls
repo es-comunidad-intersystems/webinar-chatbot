@@ -1,9 +1,14 @@
 Class Chatbot.Data.User Extends (%Persistent, %JSON.Adaptor, %XML.Adaptor)
 {
 
+/// User identification
 Property userId As %String;
 
+/// User is registered
 Property registered As %Boolean;
+
+/// Patient number
+Property patientNo As %String;
 
 Index UserIdKey On userId [ IdKey, Unique ];
 

@@ -20,16 +20,17 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <true>
 <switch name='Handle Command' xpos='200' ypos='400' xend='200' yend='650' >
 <case condition='request.command="/registro"' name='/registro' >
-<sequence name='/registro' xpos='200' ypos='550' xend='200' yend='550' >
+<sequence name='/registro' xpos='200' ypos='550' xend='200' yend='450' >
 <call name='Register User' target='Data Operations' async='1' xpos='200' ypos='250' >
 <annotation><![CDATA[Data Operations]]></annotation>
 <request type='Chatbot.Msg.RegisterUserReq' >
 <assign property="callrequest.userId" value="request.userId" action="set" />
 </request>
-<response type='Ens.Response' />
+<response type='Chatbot.Msg.RegisterUserRsp' >
+<assign property="context.telegramMsg.text" value="&quot;Usuario &quot;_callresponse.user.userId_&quot; registrado como paciente &quot;_callresponse.user.patientNo" action="set" />
+</response>
 </call>
 <sync name='Wait for response' calls='Register User' type='all' xpos='200' ypos='350' />
-<assign name="Set Telegram response" property="context.telegramMsg.text" value="&quot;Usuario registrado&quot;" action="set" xpos='200' ypos='450' />
 </sequence>
 </case>
 <default>
