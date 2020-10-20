@@ -25,7 +25,7 @@ ClassMethod CreateSlots(pStartDate As %Date = {+$h}, pEndDate As %Date = {+$h+5}
 	try {
 		$$$ThrowOnError(..%DeleteExtent())
 		
-		set scheduleList = $lb("Andrología","Cardiología","Ginecología","Traumatología","Urología")
+		set scheduleList = $lb("Psicología","Dermatología","Cardiología")
 		set drList = $lb("Campos,Dr.","González,Dr.","Sagé i Pau,Dr.","Toro,Dra.","Zamora,Dr.")
 		set serviceList = $lb("Primera Visita","Revisión")
 		
