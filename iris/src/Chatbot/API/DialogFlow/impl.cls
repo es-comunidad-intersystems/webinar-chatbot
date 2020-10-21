@@ -1,8 +1,8 @@
+Include Ensemble
+
 /// Receive a requests from Dialogflow in the form of the response to a user query matched by intents with webhook enabled<br/>
 /// Business logic class defined by OpenAPI in Chatbot.API.DialogFlow.spec<br/>
 /// Created Oct 8, 2020 08:48:21
-Include Ensemble
-
 Class Chatbot.API.DialogFlow.impl Extends (%REST.Impl, Ens.BusinessService) [ ProcedureBlock ]
 {
 
@@ -42,19 +42,23 @@ ClassMethod processWebHook(body As %DynamicObject) As %DynamicObject
     set sc = service.SendRequestSync("DetectIntent WebHook Process", req, .rsp)
     $$$ThrowOnError(sc)
 
-    // return processed response
-    set rsp = {
+    // -- return processed response
+    // include text response
+    set jsonRsp = {
         "fulfillmentMessages": [{
             "text": {"text": [(rsp.text)]}
-        }],
-        "outputContexts": ({}.%FromJSON(rsp.outputContexts))
+        }]
+    }
+    // include outputContexts
+    if rsp.outputContexts'="" {
+        set jsonRsp.outputContexts = {}.%FromJSON(rsp.outputContexts)
     }
 
-    // display response in event log
-    do formatter.FormatToStream(rsp, .formattedRsp)
+    // display json processed response in event log
+    do formatter.FormatToStream(jsonRsp, .formattedRsp)
     $$$LOGINFO(formattedRsp.Read())
 
-    quit rsp
+    quit jsonRsp
 }
 
 }

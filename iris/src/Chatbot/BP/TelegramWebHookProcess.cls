@@ -38,9 +38,9 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <sync name='Wait for response' calls='Register User' type='all' xpos='200' ypos='350' />
 </sequence>
 </case>
-<case condition='request.command="/ayuda"' name='/ayuda' >
-<sequence name='/ayuda' xpos='470' ypos='550' xend='200' yend='350' >
-<assign name="Set command response" property="context.telegramMsg.text" value="&quot;Hola! Soy un bot. Puedes utilizar los comandos o escribir frases como:&quot;_$c(10)_&quot;- hola amigo!&quot;_$c(10)_&quot;- qué citas tengo?&quot;" action="set" xpos='200' ypos='250' />
+<case condition='(request.command="/start")||(request.command="/ayuda")' name='/start /ayuda' >
+<sequence name='/start /ayuda' xpos='470' ypos='550' xend='200' yend='350' >
+<assign name="Set command response" property="context.telegramMsg.text" value="&quot;Hola! Soy un chatbot de demo que está aprendiendo a chatear con pacientes :) &quot;_$c(10)_$c(10)_&quot;Puedes utilizar los comandos:&quot;_$c(10)_&quot;/registro - Registrarte como paciente&quot;_$c(10)_&quot;/ayuda - Mostrar esta ayuda&quot;_$c(10)_$c(10)_&quot;Una vez registrado, puedes escribirme frases como:&quot;_$c(10)_&quot;- hola amigo!&quot;_$c(10)_&quot;- qué citas tengo?&quot;_$c(10)_&quot;- quiero programar una cita para mañana&quot;" action="set" xpos='200' ypos='250' />
 </sequence>
 </case>
 <default>

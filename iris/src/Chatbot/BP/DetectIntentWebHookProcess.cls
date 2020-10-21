@@ -1,5 +1,5 @@
 /// 
-Class Chatbot.BP.DetectIntentWebHookProcess Extends Ens.BusinessProcessBPL
+Class Chatbot.BP.DetectIntentWebHookProcess Extends Ens.BusinessProcessBPL [ DependsOn = Chatbot.BP.DetectIntentWebHookProcessContext ]
 {
 
 Storage Default
@@ -10,17 +10,7 @@ Storage Default
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
-<process language='objectscript' request='Chatbot.Msg.DetectIntentWebHookReq' response='Chatbot.Msg.DetectIntentWebHookRsp' height='2000' width='2000' >
-<context>
-<property name='nextApptRsp' type='Chatbot.Msg.GetNextApptRsp' instantiate='0' />
-<property name='apptDate' type='%Date' instantiate='0' />
-<property name='apptSchedule' type='%String' instantiate='0' >
-<parameters>
-<parameter name='MAXLEN'  value='' />
-</parameters>
-</property>
-<property name='findSlotRsp' type='Chatbot.Msg.FindApptSlotRsp' instantiate='0' />
-</context>
+<process language='objectscript' request='Chatbot.Msg.DetectIntentWebHookReq' response='Chatbot.Msg.DetectIntentWebHookRsp' contextsuperclass='Chatbot.BP.DetectIntentWebHookProcessContext' height='2000' width='2000' >
 <sequence xend='200' yend='700' >
 <assign name="Default response" property="response.text" value="request.fulfillmentText" action="set" xpos='200' ypos='250' >
 <annotation><![CDATA[Pre-calculated DialogFlow response]]></annotation>
@@ -41,9 +31,11 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <transform name='Rsp 2 WebHookRsp' class='Chatbot.DT.GetNextApptRsp2DetectIntentWebHookRsp' source='context.nextApptRsp' target='response' xpos='200' ypos='450' >
 <annotation><![CDATA[Transform response to webhook response]]></annotation>
 </transform>
-<code name='No appointments response' xpos='200' ypos='550' >
+<code name='Set response' xpos='200' ypos='550' >
 <![CDATA[ if response.text="" {
    set response.text = "No tiene citas en los próximos días"
+ } else {
+   set response.text = "Tus próximas citas son:"_$char(10)_response.text
  }]]>
 </code>
 </sequence>
@@ -51,10 +43,9 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <case condition='request.intent="book_appt"' name='book_appt' >
 <sequence name='Book Appointment' xpos='605' ypos='500' xend='200' yend='650' >
 <code name='Parse params' xpos='200' ypos='250' >
-<![CDATA[ set apptDateValue = {}.%FromJSON(request.raw).queryResult.parameters."appt_date"
- set context.apptDate = $zdateh($piece(apptDateValue, "T", 1), 3)
- 
- set context.apptSchedule = {}.%FromJSON(request.raw).queryResult.parameters."appt_schedule"]]>
+<annotation><![CDATA[Parse incoming parameters (date, schedule)]]></annotation>
+<![CDATA[ set sc = context.BookApptParseParams(request)
+ $$$ThrowOnError(sc)]]>
 </code>
 <call name='Find Appt Slots' target='Data Operations' async='1' xpos='200' ypos='350' >
 <request type='Chatbot.Msg.FindApptSlotReq' >
@@ -67,30 +58,34 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </call>
 <sync name='Wait for find slots rsp' calls='Find Appt Slots' timeout='30' type='all' xpos='200' ypos='450' />
 <code name='Set response' xpos='200' ypos='550' >
-<![CDATA[ set appt = context.findSlotRsp.appt
- 
- // slot available
- if $isobject(appt) 
- {
-   set response.text = "Tienes un hueco disponible para "_appt.Schedule_" el día "_$zdate(appt.ApptDate,4)_" con "_appt.Doctor_" a las "_$ztime(appt.StartTime, 2)_". ¿Quieres confirmar la cita?"
-   set outputContexts = [
-            {
-                "name":(request.session_"/contexts/book_appt-followup"),
-                "lifespanCount":5,
-                "parameters": {
-                    "appt_date":"2020-10-26T12:00:00+02:00",
-                    "hola":"adios"
-                }
-            }
-        ]
-    set response.outputContexts = outputContexts.%ToJSON()
- }
- 
- // slot not-available
- else 
- {
-   set response.text = "Lo siento, no tenemos huecos disponibles."
- }]]>
+<annotation><![CDATA[Set response depending on available slots]]></annotation>
+<![CDATA[ set sc = context.BookApptSetResponse(request, response)
+ $$$ThrowOnError(sc)]]>
+</code>
+</sequence>
+</case>
+<case condition='request.intent="book_appt - yes"' name='book_appt - yes' >
+<sequence name='Book Appt Yes' xpos='875' ypos='500' xend='200' yend='650' >
+<code name='Parse Params' xpos='200' ypos='250' >
+<annotation><![CDATA[Parse incoming parameters]]></annotation>
+<![CDATA[ set sc = context.BookApptYesParseParams(request)
+ $$$ThrowOnError(sc)
+ ]]>
+</code>
+<call name='Book Appointment' target='Data Operations' async='1' xpos='200' ypos='350' >
+<request type='Chatbot.Msg.BookApptSlotReq' >
+<assign property="callrequest.apptId" value="context.apptId" action="set" />
+<assign property="callrequest.userId" value="request.userId" action="set" />
+</request>
+<response type='Chatbot.Msg.BookApptSlotRsp' >
+<assign property="context.bookSlotRsp" value="callresponse" action="set" />
+</response>
+</call>
+<sync name='Wait for booking rsp' calls='Book Appointment' timeout='30' type='all' xpos='200' ypos='450' />
+<code name='Set response' xpos='200' ypos='550' >
+<annotation><![CDATA[Set response depending on book appointment confirmation]]></annotation>
+<![CDATA[ set sc = context.BookApptYesSetResponse(request, response)
+ $$$ThrowOnError(sc)]]>
 </code>
 </sequence>
 </case>

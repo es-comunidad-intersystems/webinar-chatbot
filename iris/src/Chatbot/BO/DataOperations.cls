@@ -3,7 +3,6 @@ Class Chatbot.BO.DataOperations Extends Ens.BusinessOperation
 
 Parameter INVOCATION = "Queue";
 
-/// 
 /// Registers a user. Simulates the registration process of a user and linking to a patient.
 Method registerUser(pRequest As Chatbot.Msg.RegisterUserReq, pResponse As Chatbot.Msg.RegisterUserRsp) As %Status
 {
@@ -19,7 +18,7 @@ Method registerUser(pRequest As Chatbot.Msg.RegisterUserReq, pResponse As Chatbo
       // assign a patient number
       set userObj.patientNo = ##class(%PopulateUtils).SSN()
       // create some appointments
-      $$$ThrowOnError(##class(Chatbot.Data.Appointment).CreateRandomAppointments(userObj.patientNo, $random(3)))
+      // $$$ThrowOnError(##class(Chatbot.Data.Appointment).CreateRandomAppointments(userObj.patientNo, 1+$random(3)))
     }
     // -- update user
     set userObj.registered = 1
@@ -113,6 +112,34 @@ Method findAppointmentSlot(pRequest As Chatbot.Msg.FindApptSlotReq, pResponse As
   quit ret
 }
 
+/// Books an appointment slot for a patient
+Method bookAppointmentSlot(pRequest As Chatbot.Msg.BookApptSlotReq, pResponse As Chatbot.Msg.BookApptSlotRsp) As %Status
+{
+  set ret = $$$OK
+  try {
+      set pResponse = ##class(Chatbot.Msg.BookApptSlotRsp).%New()
+      set pResponse.done = 0
+
+      // find user and appointment slot
+      set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
+      set apptObj = ##class(Chatbot.Data.Appointment).%OpenId(pRequest.apptId)
+
+      // udpate appointment slot and set user patient number
+      if ($isobject(userObj) && $isobject(apptObj)) {
+        if apptObj.PatientNo="" {
+          set apptObj.PatientNo = userObj.patientNo
+          set pResponse.appt = apptObj
+          set pResponse.done = 1
+        }
+      }
+    
+  } catch ex {
+    set ret = ex.AsStatus()
+  }
+
+  quit ret
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -127,6 +154,9 @@ XData MessageMap
   </MapItem>
   <MapItem MessageType="Chatbot.Msg.FindApptSlotReq">
     <Method>findAppointmentSlot</Method>
+  </MapItem>
+  <MapItem MessageType="Chatbot.Msg.BookApptSlotReq">
+    <Method>bookAppointmentSlot</Method>
   </MapItem>
 </MapItems>
 }

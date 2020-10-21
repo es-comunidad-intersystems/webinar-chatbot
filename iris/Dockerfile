@@ -18,6 +18,11 @@ COPY --chown=51773:52773 install install
 # set iris password
 RUN echo ${IRIS_PASSWORD} > /tmp/password.txt && /usr/irissys/dev/Container/changePassword.sh /tmp/password.txt
 
+# download zpm package manager
+RUN mkdir -p /tmp/deps \
+ && cd /tmp/deps \
+ && wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer -O zpm.xml
+
 USER irisowner
 SHELL ["/irissession.sh"]
 RUN \
@@ -27,7 +32,11 @@ RUN \
   set vars("SourcePath")="/tmp/src" \
   set vars("DataDBPath")="/opt/chatbot/db/DATA" \
   set vars("CodeDBPath")="/opt/chatbot/db/CODE" \
-  set sc = ##class(Chatbot.Installer).Run(.vars)
+  set sc = ##class(Chatbot.Installer).Run(.vars) \
+  zn "CHATBOT" \
+  do $system.OBJ.Load("/tmp/deps/zpm.xml", "ck") \
+  zpm "install webterminal" \
+  set sc = 1
 
 # bringing the standard shell back
 SHELL ["/bin/bash", "-c"]
