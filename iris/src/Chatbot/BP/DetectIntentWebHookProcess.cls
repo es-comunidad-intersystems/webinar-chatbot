@@ -41,13 +41,15 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </sequence>
 </case>
 <case condition='request.intent="book_appt"' name='book_appt' >
-<sequence name='Book Appointment' xpos='605' ypos='500' xend='200' yend='650' >
-<code name='Parse params' xpos='200' ypos='250' >
+<sequence name='Book Appointment' xpos='605' ypos='500' xend='200' yend='900' >
+<if name='required params?' condition='request.allRequiredParamsPresent' xpos='200' ypos='250' xend='200' yend='800' >
+<true>
+<code name='Parse params' xpos='200' ypos='350' >
 <annotation><![CDATA[Parse incoming parameters (date, schedule)]]></annotation>
 <![CDATA[ set sc = context.BookApptParseParams(request)
  $$$ThrowOnError(sc)]]>
 </code>
-<call name='Find Appt Slots' target='Data Operations' async='1' xpos='200' ypos='350' >
+<call name='Find Appt Slots' target='Data Operations' async='1' xpos='200' ypos='450' >
 <request type='Chatbot.Msg.FindApptSlotReq' >
 <assign property="callrequest.apptDate" value="context.apptDate" action="set" />
 <assign property="callrequest.schedule" value="context.apptSchedule" action="set" />
@@ -56,12 +58,14 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="context.findSlotRsp" value="callresponse" action="set" />
 </response>
 </call>
-<sync name='Wait for find slots rsp' calls='Find Appt Slots' timeout='30' type='all' xpos='200' ypos='450' />
-<code name='Set response' xpos='200' ypos='550' >
+<sync name='Wait for find slots rsp' calls='Find Appt Slots' timeout='30' type='all' xpos='200' ypos='550' />
+<code name='Set response' xpos='200' ypos='650' >
 <annotation><![CDATA[Set response depending on available slots]]></annotation>
 <![CDATA[ set sc = context.BookApptSetResponse(request, response)
  $$$ThrowOnError(sc)]]>
 </code>
+</true>
+</if>
 </sequence>
 </case>
 <case condition='request.intent="book_appt - yes"' name='book_appt - yes' >

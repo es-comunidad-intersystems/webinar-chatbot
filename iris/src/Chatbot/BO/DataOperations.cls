@@ -36,19 +36,36 @@ Method registerUser(pRequest As Chatbot.Msg.RegisterUserReq, pResponse As Chatbo
   quit ret
 }
 
-/// Checks if a user is registered
-Method isUserRegistered(pRequest As Chatbot.Msg.IsUserRegisteredReq, pResponse As Chatbot.Msg.IsUserRegisteredRsp) As %Status
+/// Returns user info
+Method getUserInfo(pRequest As Chatbot.Msg.GetUserInfoReq, pResponse As Chatbot.Msg.GetUserInfoRsp) As %Status
 {
   set ret = $$$OK
-  try {
-      
-      set pResponse = ##class(Chatbot.Msg.IsUserRegisteredRsp).%New()
-      set pResponse.registered = 0
-      set pResponse.userId = pRequest.userId
+  try { 
+      set pResponse = ##class(Chatbot.Msg.GetUserInfoRsp).%New()
+     
+      set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
+      set pResponse.user = userObj
+
+  } catch ex {
+    set ret = ex.AsStatus()
+  }
+
+  quit ret
+}
+
+/// Sets user language
+Method setUserLang(pRequest As Chatbot.Msg.SetUserLangReq, pResponse As Chatbot.Msg.SetUserLangRsp) As %Status
+{
+  set ret = $$$OK
+  try { 
+      set pResponse = ##class(Chatbot.Msg.SetUserLangRsp).%New()
+      set pResponse.done = 0
 
       set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
-      if ($isobject(userObj) && (userObj.registered)) {
-        set pResponse.registered = 1
+      if $isobject(userObj) {
+        set userObj.lang = pRequest.lang
+        $$$ThrowOnError(userObj.%Save())
+        set pResponse.done = 1
       }
 
   } catch ex {
@@ -124,7 +141,7 @@ Method bookAppointmentSlot(pRequest As Chatbot.Msg.BookApptSlotReq, pResponse As
       set userObj = ##class(Chatbot.Data.User).UserIdKeyOpen(pRequest.userId)
       set apptObj = ##class(Chatbot.Data.Appointment).%OpenId(pRequest.apptId)
 
-      // udpate appointment slot and set user patient number
+      // update appointment slot and set user patient number
       if ($isobject(userObj) && $isobject(apptObj)) {
         if apptObj.PatientNo="" {
           set apptObj.PatientNo = userObj.patientNo
@@ -146,8 +163,11 @@ XData MessageMap
   <MapItem MessageType="Chatbot.Msg.RegisterUserReq">
     <Method>registerUser</Method>
   </MapItem>
-  <MapItem MessageType="Chatbot.Msg.IsUserRegisteredReq">
-    <Method>isUserRegistered</Method>
+  <MapItem MessageType="Chatbot.Msg.GetUserInfoReq">
+    <Method>getUserInfo</Method>
+  </MapItem>
+  <MapItem MessageType="Chatbot.Msg.SetUserLangReq">
+    <Method>setUserLang</Method>
   </MapItem>
   <MapItem MessageType="Chatbot.Msg.GetNextApptReq">
     <Method>getNextAppointments</Method>

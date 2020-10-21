@@ -102,7 +102,7 @@ Method BookApptYesSetResponse(request As Chatbot.Msg.DetectIntentWebHookReq, res
     
         // slot available
         if ..bookSlotRsp.done {
-            set response.text = "Cita de "_appt.Schedule_" confirmada! Tu cita es el día "_$zdate(appt.ApptDate,4)_" de "_$ztime(appt.StartTime, 2)_" a "_$ztime(appt.EndTime, 2)_" con "_appt.Doctor
+            set response.text = "Cita de "_appt.Schedule_" confirmada! Día "_$zdate(appt.ApptDate,4)_" de "_$ztime(appt.StartTime, 2)_" a "_$ztime(appt.EndTime, 2)_" con "_appt.Doctor
         }
         // slot not-available
         else {

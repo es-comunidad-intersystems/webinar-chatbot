@@ -10,6 +10,9 @@ Property registered As %Boolean;
 /// Patient number
 Property patientNo As %String;
 
+/// User language
+Property lang As %String [ InitialExpression = "es" ];
+
 Index UserIdKey On userId [ IdKey, Unique ];
 
 Storage Default
@@ -23,6 +26,9 @@ Storage Default
 </Value>
 <Value name="3">
 <Value>patientNo</Value>
+</Value>
+<Value name="4">
+<Value>lang</Value>
 </Value>
 </Data>
 <DataLocation>^Chatbot.Data.UserD</DataLocation>
