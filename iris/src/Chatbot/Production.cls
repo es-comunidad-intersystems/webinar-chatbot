@@ -36,6 +36,12 @@ XData ProductionDefinition
   </Item>
   <Item Name="DetectIntent WebHook Process" Category="" ClassName="Chatbot.BP.DetectIntentWebHookProcess" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="Google Translate" Category="" ClassName="Chatbot.BO.GoogleTranslate" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Adapter" Name="URL">https://translation.googleapis.com/language/translate/v2</Setting>
+    <Setting Target="Host" Name="ArchiveIO">1</Setting>
+    <Setting Target="Adapter" Name="SSLConfig">SSL</Setting>
+    <Setting Target="Host" Name="GoogleCloudCredentials">GoogleTranslate</Setting>
+  </Item>
 </Production>
 }
 

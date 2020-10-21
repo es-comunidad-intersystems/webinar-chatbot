@@ -27,8 +27,6 @@ Method detectIntent(pRequest As Chatbot.Msg.DetectIntentReq, Output pResponse As
             }
         }
 
-        $$$LOGINFO(url)
-
         // send POST request
         set sc = ..Adapter.PostURL(url, .httpRsp, "", body.%ToJSON())
 		if $$$ISERR(sc),$isobject(httpRsp),$isobject(httpRsp.Data),httpRsp.Data.Size {
@@ -43,7 +41,7 @@ Method detectIntent(pRequest As Chatbot.Msg.DetectIntentReq, Output pResponse As
             set pResponse.raw = formatted
 
             // instantiate response in json dynamic object & grab some properties
-            //set jsonRsp = {}.%FromJSON(httpRsp.Data.Read()) 
+            //set jsonRsp = {}.%FromJSON(formatted) 
         }
 
    } catch ex {
