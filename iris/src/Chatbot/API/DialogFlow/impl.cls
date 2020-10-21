@@ -1,6 +1,8 @@
 /// Receive a requests from Dialogflow in the form of the response to a user query matched by intents with webhook enabled<br/>
 /// Business logic class defined by OpenAPI in Chatbot.API.DialogFlow.spec<br/>
 /// Created Oct 8, 2020 08:48:21
+Include Ensemble
+
 Class Chatbot.API.DialogFlow.impl Extends (%REST.Impl, Ens.BusinessService) [ ProcedureBlock ]
 {
 
