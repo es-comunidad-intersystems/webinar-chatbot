@@ -2,9 +2,9 @@ Simple IRIS chatbot using Telegram and Google Dialog Flow (*proof of concept*).
 
 <img src="img/irischatbot-diagram.png" width="500">
 
-So it looks like that:
+So it looks like this:
 
-<img src="img/irischatbot-demo-es.png" width="300">
+<img src="img/irischatbot.gif" width="300">
 
 # SETUP
 You need a public host with a domain name and HTTPS.
@@ -141,3 +141,9 @@ Create IRIS credentials for your Telegram Bot and Cloud Translate service.
 
 * IRIS > Chatbot > Create Credentials > `TelegramBot` > use your Telegram bot token as password.
 * IRIS > Chatbot > Create Credentials > `GoogleTranslate` > user you Cloud Translate API key as password.
+
+
+## Reset demo data
+```
+write ##class(Chatbot.Util).ResetDemo()
+```
