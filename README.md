@@ -9,7 +9,7 @@ So it looks like that:
 # SETUP
 You need a public host with a domain name and HTTPS.
 
-## VM in Compute Engine (Google Cloud)
+## VM in Compute Engine (Google Cloud)
 Create a new VM that will be used to host IRIS + WebGateway instance on Google Cloud:
 
 * Region: us-central1
@@ -71,7 +71,7 @@ sudo cp /etc/letsencrypt/live/chatbot.mydomain.dev/fullchain.pem webgateway/ssl-
 sudo cp /etc/letsencrypt/live/chatbot.mydomain.dev/privkey.pem webgateway/ssl-cert.key
 ```                   
 
-## Google Dialog Flow API Credentials
+## Google Dialog Flow API Credentials
 Enable Google Dialog Flow API on Google Cloud.
 
 * APIS & Services > Enable Google Dialog Flow API.
@@ -92,7 +92,7 @@ In Google Dialog Flow Essentials, create a new agent and import from zip.
 
 Check *Fullfillment* URL and credentials.
 
-## Telegram Bot
+## Telegram Bot
 1-Create a bot using [BotFather](https://t.me/botfather) bot.
 ```
 /newbot
