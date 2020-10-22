@@ -1,7 +1,9 @@
 Simple IRIS chatbot using Telegram and Google Dialog Flow (*proof of concept*).
+
 <img src="img/irischatbot-diagram.png" width="500">
 
 So it looks like that:
+
 <img src="img/irischatbot-demo-es.png" width="300">
 
 # SETUP
