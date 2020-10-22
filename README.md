@@ -1,13 +1,12 @@
 Simple IRIS chatbot using Telegram and Google Dialog Flow (*proof of concept*).
 
-<img src="img/irischatbot-diagram.png" width="500">
-
-So it looks like this:
-
 <img src="img/irischatbot.gif" width="300">
+
 
 # SETUP
 You need a public host with a domain name and HTTPS.
+
+<img src="img/irischatbot-diagram.png" width="500">
 
 ## VM in Compute Engine (Google Cloud)
 Create a new VM that will be used to host IRIS + WebGateway instance on Google Cloud:
