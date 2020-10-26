@@ -1,0 +1,76 @@
+{
+  "id": "86e66d75-84bb-4339-9bbe-f6611f0ed9f8",
+  "name": "book_appt",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "",
+      "affectedContexts": [
+        {
+          "name": "book_appt-followup",
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "5121d52b-4b04-4065-af3f-cbfb1bac3767",
+          "name": "appt_date",
+          "required": true,
+          "dataType": "@sys.date",
+          "value": "$appt_date",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [
+            {
+              "lang": "es",
+              "value": "¿Para qué día quieres la cita?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        },
+        {
+          "id": "d195f55c-3928-4b04-a957-9493af2d0c7d",
+          "name": "appt_schedule",
+          "required": true,
+          "dataType": "@appt_schedule",
+          "value": "$appt_schedule",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [
+            {
+              "lang": "es",
+              "value": "¿Qué tipo de cita quieres? Psicología, Dermatología, Cardiología"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        }
+      ],
+      "messages": [
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "es",
+          "condition": ""
+        }
+      ],
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

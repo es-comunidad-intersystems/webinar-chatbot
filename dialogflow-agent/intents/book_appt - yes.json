@@ -1,0 +1,43 @@
+{
+  "id": "4362daf0-db0f-4575-aa32-68f3cf17e51b",
+  "parentId": "86e66d75-84bb-4339-9bbe-f6611f0ed9f8",
+  "rootParentId": "86e66d75-84bb-4339-9bbe-f6611f0ed9f8",
+  "name": "book_appt - yes",
+  "auto": true,
+  "contexts": [
+    "book_appt-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "book_appt.book_appt-yes",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "es",
+          "condition": ""
+        },
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "en",
+          "condition": ""
+        }
+      ],
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "b7b9d35c-2364-47f0-a6ae-ae185a2545b3",
+    "data": [
+      {
+        "text": "cita ",
+        "userDefined": false
+      },
+      {
+        "text": "próximo lunes",
+        "meta": "@sys.date",
+        "alias": "appt_date",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Cardiología",
+        "meta": "@appt_schedule",
+        "alias": "appt_schedule",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "26a0bc95-8793-46e6-94ae-b199b125b730",
+    "data": [
+      {
+        "text": "cita para ",
+        "userDefined": false
+      },
+      {
+        "text": "pasado mañana",
+        "meta": "@sys.date",
+        "alias": "appt_date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "0b534dcd-947b-406e-b7de-933f17671012",
+    "data": [
+      {
+        "text": "quiero ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " cita ",
+        "userDefined": false
+      },
+      {
+        "text": "mañana",
+        "meta": "@sys.date",
+        "alias": "appt_date",
+        "userDefined": false
+      },
+      {
+        "text": " para ",
+        "userDefined": false
+      },
+      {
+        "text": "Dermatología",
+        "meta": "@appt_schedule",
+        "alias": "appt_schedule",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "37a8e2f9-eb86-466b-aed7-5ea57c0dda27",
+    "data": [
+      {
+        "text": "cita para ",
+        "userDefined": false
+      },
+      {
+        "text": "mañana",
+        "meta": "@sys.date",
+        "alias": "appt_date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "28b4bce0-f24d-48f7-90f1-33ced6b3e884",
+    "data": [
+      {
+        "text": "quiero ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " cita para ",
+        "userDefined": false
+      },
+      {
+        "text": "mañana",
+        "meta": "@sys.date",
+        "alias": "appt_date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "41163800-8c4d-47d2-92d3-469a4c6a505b",
+    "data": [
+      {
+        "text": "programar cita",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "0c5388e9-af24-4f9d-be27-1bb3385c3649",
+    "data": [
+      {
+        "text": "quiero programar ",
+        "userDefined": false
+      },
+      {
+        "text": "una",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " cita",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  }
+]

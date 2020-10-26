@@ -1,0 +1,25 @@
+[
+  {
+    "value": "Dermatología",
+    "synonyms": [
+      "Dermatología",
+      "Derma",
+      "Dermo"
+    ]
+  },
+  {
+    "value": "Psicología",
+    "synonyms": [
+      "Psicología",
+      "Psi",
+      "Psico"
+    ]
+  },
+  {
+    "value": "Cardiología",
+    "synonyms": [
+      "Cardiología",
+      "Cardio"
+    ]
+  }
+]

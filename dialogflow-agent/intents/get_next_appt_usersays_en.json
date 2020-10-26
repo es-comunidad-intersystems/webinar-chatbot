@@ -1,0 +1,28 @@
+[
+  {
+    "id": "a2a7ef1c-727d-4301-ae79-632020124e32",
+    "data": [
+      {
+        "text": "my appointments",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "f922e795-f2d1-4b0f-a316-4472d2e459be",
+    "data": [
+      {
+        "text": "next appointments please",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

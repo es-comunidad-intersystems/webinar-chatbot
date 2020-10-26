@@ -1,0 +1,9 @@
+{
+  "id": "2985de9c-b9f8-46d0-b58e-3973534b2537",
+  "name": "appt_schedule",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

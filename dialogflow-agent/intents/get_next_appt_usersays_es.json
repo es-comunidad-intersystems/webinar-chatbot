@@ -1,0 +1,152 @@
+[
+  {
+    "id": "af5044ac-7214-4ede-a667-3f72feae4290",
+    "data": [
+      {
+        "text": "¿cuándo tengo que ir al ",
+        "userDefined": false
+      },
+      {
+        "text": "hospital",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "a110f516-7a93-4456-bfad-3790ce5e374d",
+    "data": [
+      {
+        "text": "¿cuándo tengo que ir al ",
+        "userDefined": false
+      },
+      {
+        "text": "médico",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "839f16ab-d137-44cb-a652-bc4b9e77dfb5",
+    "data": [
+      {
+        "text": "¿qué ",
+        "userDefined": false
+      },
+      {
+        "text": "citas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " tengo?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "edde79fa-c44c-49a0-bada-f6df079d6e51",
+    "data": [
+      {
+        "text": "próximas ",
+        "userDefined": false
+      },
+      {
+        "text": "citas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "459fcc02-9a30-4331-adb3-9b27e200551f",
+    "data": [
+      {
+        "text": "¿qué ",
+        "userDefined": false
+      },
+      {
+        "text": "citas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " tengo con ",
+        "userDefined": false
+      },
+      {
+        "text": "el médico",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "a433ee1e-0914-4ac7-b2b6-a4675e8ffe8a",
+    "data": [
+      {
+        "text": "¿cuáles son mis próximas visitas?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  },
+  {
+    "id": "d0b704d9-7ef7-427e-a172-d73c2f12bb50",
+    "data": [
+      {
+        "text": "¿cuáles son mis próximas ",
+        "userDefined": false
+      },
+      {
+        "text": "citas",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "es",
+    "updated": 0
+  }
+]
