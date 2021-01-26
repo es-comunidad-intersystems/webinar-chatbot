@@ -1,9 +1,15 @@
-Simple IRIS chatbot using Telegram and Google Dialog Flow (*proof of concept*).
+Here you can find the material used in the [Webinar - Developing a Chatbot using Google DialogFlow, Telegram and InterSystems IRIS](https://comunidadintersystems.com/webinar-desarrolla-un-chatbot).
+
+# What are we going to code?
+We are coding an asistent that will help users interacting with a backend appointment system using natural language dialogs.
+
+<img src="img/intro.png" width="400">
+
+The chatbot will look like that, from the user point of view:
 
 <img src="img/irischatbot.gif" width="300">
 
-
-# Architecture
+And this is the architecture, using different services, that we are going to use:
 
 <img src="img/irischatbot-diagram.png" width="500">
 
@@ -44,7 +50,7 @@ Clone project repository on VM.
 
 ```
 git config --global credential.helper cache
-git clone https://github.com/isc-afuentes/iris-chatbot
+git clone https://github.com/es-comunidad-intersystems/webinar-chatbot.git
 ```
 
 ## SSL Certificate (HTTPS)
