@@ -1,5 +1,7 @@
 Here you can find the material used in the [Webinar - Developing a Chatbot using Google DialogFlow, Telegram and InterSystems IRIS](https://comunidadintersystems.com/webinar-desarrolla-un-chatbot).
 
+Languages: [🇺🇸](README.md)[🇪🇸](README.es.md)
+
 # What are we going to code?
 We are coding an asistent that will help users interacting with a backend appointment system using natural language dialogs.
 
