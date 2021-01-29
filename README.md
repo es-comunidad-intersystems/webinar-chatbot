@@ -17,7 +17,7 @@ Y esta es la arquitectura, con los diferentes servicios, que vamos a usar:
 <img src="img/irischatbot-diagram-es.png" width="500">
 
 # Instalación
-Necesitas un accesible en internet, con un nombre de dominio registrado y HTTPS.
+Necesitas servidor un accesible en internet, con un nombre de dominio registrado y HTTPS.
 
 ## VM en Compute Engine (Google Cloud)
 Crea una nueva VM que utilizarás para albergar las instancias de InterSystems IRIS y un Webgateway en Google Cloud:
