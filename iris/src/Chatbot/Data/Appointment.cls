@@ -17,7 +17,7 @@ Property PatientNo As %String;
 
 /// Create appointment slots
 /// write ##class(Chatbot.Data.Appointment).CreateSlots()
-ClassMethod CreateSlots(pStartDate As %Date = {+$h}, pEndDate As %Date = {+$h+5})
+ClassMethod CreateSlots(pStartDate As %Date = {+$h}, pEndDate As %Date = {+$h+14})
 {
     #define RandomItem(%list) $lg(%list, 1+$random($listlength(%list)))
 
