@@ -60,7 +60,7 @@ Obtener certificados (gratuitos) de [Let's encrypt](https://letsencrypt.org) que
 
 Tanto Telegram como Google DialogFlow requieren conexiones HTTPS (y no pueden utilizar certificados auto-firmados).
 
-Las instrucciones completas las puedes encontrar [here](https://certbot.eff.org/lets-encrypt/ubuntuxenial-apache).
+Las instrucciones completas las puedes encontrar [aquí](https://certbot.eff.org/lets-encrypt/ubuntuxenial-apache).
 
 1-Instalar certbot en la VM
 ```
