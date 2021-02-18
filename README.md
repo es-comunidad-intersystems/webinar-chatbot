@@ -1,6 +1,6 @@
 Aquí encontrarás el material utilizado en el [Webinar - Desarrolla un Chatbot con Google DialogFlow, Telegram e InterSystems IRIS](https://comunidadintersystems.com/webinar-desarrolla-un-chatbot), échale un vistazo al [vídeo](https://www.youtube.com/watch?v=5L8j1SPYg4w&feature=youtu.be)👈. 
 
-Idiomas: [🇺🇸](README.md)[🇪🇸](README.es.md)
+Idiomas: [🇺🇸](README.en.md)[🇪🇸](README.md)
 
 # ¿Qué vamos a desarrollar?
 
